@@ -21,6 +21,8 @@ public class ServicosDeContato {
     }
 
     public Contato alterarContato(Contato contato) {
+        Contato old =  this.repositorioDeContato.obterPorId(contato.getId());
+        contato.setAuditoriaVo(old.getAuditoriaVo());
         this.repositorioDeContato.alterar(contato);
         return contato;
     }
@@ -33,8 +35,8 @@ public class ServicosDeContato {
     }
 
     public List<Contato> obterTodosPaginado(Integer page, Integer size) {
-        this.repositorioDeContato.obterTodosPaginado(page,size);
-        return null;
+        return this.repositorioDeContato.obterTodosPaginado(page,size);
+
     }
 
     public Contato adicionarContato(Contato contato) {

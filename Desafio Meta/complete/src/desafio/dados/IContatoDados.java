@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface IContatoDados extends IRepositorioGenericoDados<Contato, Long>{
 
-    List<Contato> obterTodosPaginado(Integer page, Integer size);
+    List obterTodosPaginado(Integer page, Integer size);
 }

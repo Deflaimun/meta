@@ -4,7 +4,7 @@ import desafio.dados.IContatoDados;
 import desafio.dominio.Contato;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 import java.util.List;
 
 @Repository
@@ -19,13 +19,14 @@ public class OracleContatoDados extends OracleRepositorioGenericoDados<Contato,L
     @Override
     public List<Contato> obterTodosPaginado(Integer page, Integer size) {
         StringBuilder consulta = new StringBuilder()
-                .append("SELECT contato from Contato contato ")
-                .append("WHERE ROWID < :pagina ");
+                .append("SELECT * FROM Contato  ")
+                .append("ORDER BY NO_SEQ_ID_CONT ")
+                .append("OFFSET :page ROWS FETCH NEXT :size ROWS ONLY");
 
+        final Query query = this.getGerenciadorDeEntidade().createNativeQuery(consulta.toString(), Contato.class);
 
-        final TypedQuery<Contato> query = this.getGerenciadorDeEntidade().createQuery(consulta.toString(), Contato.class);
-
-        query.setParameter("pagina", page*size);
+        query.setParameter("page", page*size);
+        query.setParameter("size", size);
         return query.getResultList();
     }
 }

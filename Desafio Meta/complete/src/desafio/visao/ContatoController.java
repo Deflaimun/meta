@@ -22,26 +22,24 @@ public class ContatoController {
     @Autowired
     private ServicosDeContato servicosDeContato;
     
-    @GetMapping
-    public Contato obterContato(@RequestParam (value = "idContato")Long id) {
-
-        Contato contato = servicosDeContato.obterContato(id);
-        return contato;
+    @GetMapping("/idContato")
+    public Contato obterContato(@RequestParam Long id) {
+        return servicosDeContato.obterContato(id);
     }
 
-    @PutMapping
+    @PutMapping("/idContato")
     public Contato alterarContato(@RequestBody ContatoDto contato) {
         Contato cont = new Contato(contato);
         return servicosDeContato.alterarContato(cont);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/idContato")
     public Contato deletarContato(@RequestParam (value = "idContato")Long id) {
         return servicosDeContato.deletarContato(id);
     }
 
-    @RequestMapping
-    public List<Contato> obterTodosPaginado(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size){
+    @GetMapping
+    public List<Contato> obterTodosPaginado(@RequestParam(required = false, value = "page")  Integer page, @RequestParam(required = false,value = "size") Integer size){
         return servicosDeContato.obterTodosPaginado(page != null ? page : 0 ,size != null ? size : 10);
     }
 
@@ -50,7 +48,4 @@ public class ContatoController {
         Contato cont = new Contato(contato);
         return servicosDeContato.adicionarContato(cont);
     }
-
-
-    
 }

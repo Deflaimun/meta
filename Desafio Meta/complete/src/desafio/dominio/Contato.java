@@ -61,14 +61,22 @@ public class Contato  extends EntidadeGenerica{
         this.obs = obs;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public Contato() {
     }
 
     public Contato(ContatoDto contatoDto) {
         this.id = contatoDto.getId();
+        this.nome = contatoDto.getNome();
         this.canal = contatoDto.getCanal();
         this.obs = contatoDto.getObs();
         this.valor = contatoDto.getValor();
-
     }
 }
