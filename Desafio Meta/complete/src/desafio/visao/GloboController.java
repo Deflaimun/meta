@@ -11,7 +11,6 @@ import desafio.dto.RespostaQuestaoTresDto;
 import desafio.dto.RespostaQuestaoUmDto;
 import desafio.servicos.ServicosDeGlobo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +24,7 @@ public class GloboController {
     @Autowired
     private ServicosDeGlobo servicosDeGlobo;
 
-    @GetMapping("/1")
+    @PostMapping("/1")
     private RespostaQuestaoUmDto questaoUm (@RequestBody EntradaQuestaoUmDto q){
         return this.servicosDeGlobo.questaoUm(q);
     }
